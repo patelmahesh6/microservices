@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
 
 /**
@@ -32,4 +33,6 @@ public class Product implements Serializable {
     private String name;
     private String description;
     private double price;
+    @Transient
+    private boolean inStock = true;
 }
