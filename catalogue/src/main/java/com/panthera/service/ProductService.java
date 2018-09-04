@@ -6,11 +6,11 @@
 package com.panthera.service;
 
 import com.panthera.model.Product;
+import com.panthera.model.ProductInventoryResponse;
 import com.panthera.repository.ProductRepository;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -60,11 +60,4 @@ public class ProductService {
         return productOptional;
     }
 
-}
-
-@Data
-class ProductInventoryResponse {
-
-    private String productCode;
-    private int availableQuantity;
 }
