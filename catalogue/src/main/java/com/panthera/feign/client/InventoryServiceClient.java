@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.panthera.service;
+package com.panthera.feign.client;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.sivalabs.catalogservice.utils.MyThreadLocalsHolder;
-import com.sivalabs.catalogservice.web.models.ProductInventoryResponse;
+import com.panthera.model.ProductInventoryResponse;
+import com.panthera.util.MyThreadLocalsHolder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,16 +27,14 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class InventoryServiceClient {
 
-    private final RestTemplate restTemplate;
-    private final InventoryServiceFeignClient inventoryServiceFeignClient;
-    //TODO; move this to config file
-    private static final String INVENTORY_API_PATH = "http://inventory-service/api/";
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Autowired
-    public InventoryServiceClient(RestTemplate restTemplate, InventoryServiceFeignClient inventoryServiceFeignClient) {
-        this.restTemplate = restTemplate;
-        this.inventoryServiceFeignClient = inventoryServiceFeignClient;
-    }
+    private InventoryServiceFeignClient inventoryServiceFeignClient;
+
+    //TODO; move this to config file
+    private static final String INVENTORY_API_PATH = "http://inventory-service/api/";
 
     @HystrixCommand(fallbackMethod = "getDefaultProductInventoryLevels",
             commandProperties = {
@@ -61,14 +59,6 @@ public class InventoryServiceClient {
                         ProductInventoryResponse.class,
                         productCode);
 
-        /*
-        //Simulate Delay
-        try {
-            java.util.concurrent.TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-         */
         if (itemResponseEntity.getStatusCode() == HttpStatus.OK) {
             Integer quantity = itemResponseEntity.getBody().getAvailableQuantity();
             log.info("Available quantity: " + quantity);
@@ -88,4 +78,5 @@ public class InventoryServiceClient {
         response.setAvailableQuantity(50);
         return Optional.ofNullable(response);
     }
+
 }
