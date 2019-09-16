@@ -26,6 +26,12 @@
 
     <dependencies>
         
+         <!-- Register Zipkin server -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        
          <!-- Sleuth to add tracing information in logs -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
