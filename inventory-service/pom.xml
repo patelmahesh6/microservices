@@ -26,13 +26,19 @@
 
     <dependencies>
         
-         <!--Registering microservices to Config Server-->
+         <!-- Sleuth to add tracing information in logs -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        
+        <!--Registering microservices to Config Server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
         
-         <!--Registering microservices as Eureka Clients-->
+        <!--Registering microservices as Eureka Clients-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -62,7 +68,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>

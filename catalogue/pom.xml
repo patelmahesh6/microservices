@@ -26,6 +26,12 @@
     </properties>
 
     <dependencies>
+        
+        <!-- Sleuth to add tracing information in logs -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
    
         <!--Registering microservices to Config Server-->
         <dependency>
