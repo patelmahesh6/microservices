@@ -23,5 +23,5 @@ public class Order {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrderItem> items;
-
+    
 }
